@@ -12,7 +12,7 @@
 1. **Clone the repository**
    
    ```
-   git clone [https://github.com/Abubraik/Company-Address-Book.git]
+   git clone https://github.com/Abubraik/Company-Address-Book.git
    ```
 3. **Restore dependencies**
    
