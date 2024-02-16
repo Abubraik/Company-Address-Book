@@ -1,0 +1,42 @@
+﻿@using Company_Address_Book.Models.ViewModels
+@model CreateContactViewModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Company</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Add Company</h2>
+        <form action="/Home/CreateContact" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="CompanyId">Company Id </label>
+                <input asp-for="CompanyId" required>
+                <span asp-validation-for="CompanyId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="ContactName">Contact Name </label>
+                <input asp-for="ContactName" required>
+                <span asp-validation-for="ContactName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="ContactNumber">Contact Number </label>
+                <input asp-for="ContactNumber" required>
+                <span asp-validation-for="ContactNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="ContactAge">ContactAge </label>
+                <input asp-for="ContactAge" required>
+                <span asp-validation-for="ContactAge" class="text-danger"></span>
+            </div>
+           
+            <button type="submit" class="btn btn-primary">Create Contact</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

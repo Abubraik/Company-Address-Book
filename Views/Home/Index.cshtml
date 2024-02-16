@@ -1,0 +1,64 @@
+﻿@using Company_Address_Book.Models
+@model List<Company>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Table</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Company Details</h2>
+        <form action="/Home/ReadFile" method="post" enctype="multipart/form-data" novalidate>
+            <div class="form-group">
+                <label for="fileUpload">Upload File</label>
+                <input type="file" class="form-control-file" name="file" required accept=".txt">
+                
+            </div>
+            <button type="submit" class="btn btn-primary">Seed Data</button>
+        </form>
+        </div>
+        <div class="container mt-5">
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Company</th>
+                    <th>NumContacts</th>
+                    <th>MaxContactAge</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    
+                @foreach (var company in Model)
+                {
+                <tr>
+                    <td>@company.CompanyId</td>
+                    <td>@company.CompanyName</td>
+                    <td>@company.NumberOfContacts</td>
+                    <td>@company.ContactMaxAge</td>
+                </tr>
+                }
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="container mt-5">
+        <a type="button" class="btn btn-primary" href="/home/AddCompany">Add Company</a>
+        <a type="button" class="btn btn-primary" href="/home/CreateContact">Create Contact</a>
+        </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
