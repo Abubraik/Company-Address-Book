@@ -4,6 +4,7 @@ using Company_Address_Book.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Company_Address_Book.Controllers
 {
@@ -23,12 +24,6 @@ namespace Company_Address_Book.Controllers
         {
             return View(_companyRepository.GetCompanies().ToList());
         }
-        [HttpGet]
-        public IActionResult AddCompany()
-        {
-            return View();
-        }
-
         public IActionResult ReadFile(IFormFile file)
         {
             var companies = new List<Company>();
@@ -59,12 +54,37 @@ namespace Company_Address_Book.Controllers
                 }
                 foreach (var company in companies)
                 {
-                    if(_companyRepository.GetCompanyByName(company.CompanyName) == null)
+                    if (_companyRepository.GetCompanyByName(company.CompanyName) == null)
+                        _companyRepository.AddCompany(company);
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult AddCompany()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddCompany(AddCompanyViewModel newCompany)
+        {
+            if(ModelState.IsValid)
+            {
+                if (_companyRepository.GetCompanyByName(newCompany.CompanyName) == null)
+                {
+                    Company company = new Company
+                    {
+                        CompanyName = newCompany.CompanyName,
+                        ContactMaxAge = int.Parse(newCompany.ContactMaxAge),
+                        NumberOfContacts = newCompany.NumberOfContacts,
+                    };
                     _companyRepository.AddCompany(company);
                 }
             }
-                return RedirectToAction("Index");  
+            return RedirectToAction("index");
         }
+
         [HttpGet]
         public IActionResult CreateContact()
         {
@@ -82,6 +102,7 @@ namespace Company_Address_Book.Controllers
                     var contactsNum = _contactRepository.GetAllContacts.Where(c => c.CompanyId == company.CompanyId).Count();
                     if(contactsNum +1 <= company.NumberOfContacts && newContact.ContactAge <= company.ContactMaxAge)
                     {
+                        
                         _contactRepository.AddContact(newContact);
                     }
                 }

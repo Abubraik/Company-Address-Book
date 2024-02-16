@@ -6,7 +6,7 @@ namespace Company_Address_Book.Repositories
     {
         Company GetCompanyById(int id);
         IQueryable<Company> GetCompanies();
-        void AddCompany(Company company);
+        Company AddCompany(Company company);
         Company GetCompanyByName(string name);
         //Company DeleteCompany(int id);
     }

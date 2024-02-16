@@ -9,7 +9,7 @@ namespace Company_Address_Book.Models.ViewModels
         [Required]
         public int NumberOfContacts { get; set; }
         [Required,MaxLength(2)]
-        public int ContactMaxAge { get; set; }
+        public string ContactMaxAge { get; set; }
        
     }
 }

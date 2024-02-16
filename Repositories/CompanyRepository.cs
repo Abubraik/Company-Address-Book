@@ -1,4 +1,5 @@
 ﻿using Company_Address_Book.Models;
+using Company_Address_Book.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace Company_Address_Book.Repositories
@@ -19,10 +20,12 @@ namespace Company_Address_Book.Repositories
         {
             return _context.Companies.AsNoTracking().FirstOrDefault(x => x.CompanyName == name);
         }
-        public void AddCompany(Company company)
+        public Company AddCompany(Company company)
         {
+           
             _context.Companies.Add(company);
             _context.SaveChanges();
+            return company;
         }
 
         public IQueryable<Company> GetCompanies()
